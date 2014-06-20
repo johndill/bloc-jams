@@ -91,6 +91,41 @@ body.landing .navbar {
   font-weight: 500;
 }
 
+.album-song-button {
+  text-align: center;
+  font-size: 14px;
+  background-color: white;
+  color: #d2287b;
+  border-radius: 50% 50%;
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+}
+
+.album-song-button:hover {
+  cursor: pointer;
+  color: white;
+  background-color: #d2287b;
+}
+
+.album-song-button i {
+  line-height: 28px;
+}
+
+.album-song-button .fa-play {
+  padding-left: 3px;
+}
+
+.album-song-listing td {
+  vertical-align: center;
+}
+
+td.song-number {
+  padding: 0;
+  height: 70px;
+  text-align: center;
+}
+
 .table.album-song-listing {
   font-weight: 300;
 }
