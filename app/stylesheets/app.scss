@@ -3,6 +3,12 @@
 @import "collection";
 @import "player_bar";
 
+// mixins
+@mixin radial-gradient($inner_color, $outer_color) {
+  background: -webkit-radial-gradient($inner_color, $outer_color);
+  background: radial-gradient($inner_color, $outer_color);
+}
+
 html {
     height: 100%;
 }
@@ -11,8 +17,7 @@ body {
   font-family: 'Open Sans';
   color: white;
   min-height: 100%;
-  background: -webkit-radial-gradient(#2b1339, #380c77);
-  background: radial-gradient(#2b1339, #380c77);
+  @include radial-gradient(#2b1339, #380c77);
   padding-bottom: 150px;
 
   &.landing {
