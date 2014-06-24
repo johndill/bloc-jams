@@ -21,6 +21,10 @@
     .selling-points .point p {
       font-size: 14px; }
 
+.album-cover {
+  max-width: 110%;
+  text-align: center; }
+
 .album-header-container {
   margin-top: 55px;
   margin-bottom: 40px; }
