@@ -90,7 +90,7 @@
   globals.require.list = list;
   globals.require.brunch = true;
 })();
-require.register("scripts/album", function(exports, require, module) {
+require.register("scripts_old/album", function(exports, require, module) {
 // Example albums
 var albumPicasso = {
   name: 'The Colors',
@@ -251,7 +251,7 @@ if (document.URL.match(/\/album.html/)) {
 }
 });
 
-;require.register("scripts/app", function(exports, require, module) {
+;require.register("scripts_old/app", function(exports, require, module) {
 angular.module('BlocJams', ['ui.router']).
 
   config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
@@ -295,7 +295,7 @@ angular.module('BlocJams', ['ui.router']).
   }]);
 });
 
-;require.register("scripts/collection", function(exports, require, module) {
+;require.register("scripts_old/collection", function(exports, require, module) {
 var buildAlbumThumbnail = function() {
   var template =
       '<div class="collection-album-container col-md-2">'
@@ -361,7 +361,7 @@ if (document.URL.match(/\/collection.html/)) {
 }
 });
 
-;require.register("scripts/landing", function(exports, require, module) {
+;require.register("scripts_old/landing", function(exports, require, module) {
 $(document).ready(function() {
   $('.hero-content h3').click(function() {
     subText = $(this).text();
@@ -382,7 +382,7 @@ $(document).ready(function() {
 });
 });
 
-;require.register("scripts/profile", function(exports, require, module) {
+;require.register("scripts_old/profile", function(exports, require, module) {
 var tabsContainer = '.user-profile-tabs-container';
 
 var selectTabHandler = function(event) {
