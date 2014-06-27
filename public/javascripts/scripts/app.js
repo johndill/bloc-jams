@@ -30,6 +30,12 @@ angular.module('BlocJams', ['ui.router'])
       controller: 'Collection.controller',
       templateUrl: '/templates/collection.html'
     });
+
+    $stateProvider.state('album', {
+      url: '/album',
+      templateUrl: '/templates/album.html',
+      controller: 'Album.controller'
+    })
   }])
 
   .controller('Landing.controller', ['$scope', function($scope) {
@@ -70,4 +76,39 @@ angular.module('BlocJams', ['ui.router'])
     for (var i = 0; i < 33; i++) {
       $scope.albums.push(angular.copy(albumPicasso));
     }
+  }])
+
+  .controller('Album.controller', ['$scope', function($scope) {
+    $scope.album = angular.copy(albumPicasso);
+
+    var hoveredSong = null;
+    var playingSong = null;
+
+    $scope.onHoverSong = function(song) {
+      hoveredSong = song;
+    };
+
+    $scope.offHoverSong = function(song) {
+      hoveredSong = null;
+    };
+
+    $scope.getSongState = function(song) {
+      if (song === playingSong) {
+        return 'playing';
+      }
+      else if (song === hoveredSong) {
+        return 'hovered';
+      }
+      else {
+        return 'default';
+      }
+    };
+
+    $scope.playSong = function(song) {
+      playingSong = song;
+    };
+
+    $scope.pauseSong = function(song) {
+      playingSong = null;
+    };
   }]);
