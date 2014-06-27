@@ -1,0 +1,34 @@
+<div class='collection-container container'>
+  <div class='row'> <!-- album header -->
+    <div data-ng-repeat='album in albums' class='collection-album-container col-md-2'>
+
+      <!-- album cover art and overlay -->
+      <div data-ng-mouseenter='showOverlay = true' data-ng-mouseleave='showOverlay = false' class='collection-album-image-container'>
+        <img data-ng-src='{{ album.albumArtUrl }}'>
+        <div class='collection-album-image-overlay' data-ng-show='showOverlay'>
+          <div class='collection-overlay-content'>
+            <a class='collection-overlay-button' data-ui-sref='album'>
+              <i class='fa fa-play'></i>
+            </a>
+            &nbsp;
+            <a class='collection-overlay-button'>
+              <i class='fa fa-plus'></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- album information -->
+      <div class='collection-album-info caption'>
+        <p>
+          <a class='album-name' data-ui-sref='album'>{{ album.name }}</a>
+          <br />
+          <a data-ui-sref='album'>{{ album.artist }}</a>
+          <br />
+          {{ album.songs.length }} songs
+          <br />
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

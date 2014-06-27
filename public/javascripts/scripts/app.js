@@ -1,6 +1,22 @@
-angular.module('BlocJams', ['ui.router']).
+// Example albums
+var albumPicasso = {
+  name: 'The Colors',
+  artist: 'Pablo Picass',
+  label: 'Cubism',
+  year: '1881',
+  albumArtUrl: '/images/album-placeholder.png',
+  songs: [
+    { name: 'Blue', length: '4:26' },
+    { name: 'Green', length: '3:14' },
+    { name: 'Red', length: '5:01' },
+    { name: 'Pink', length: '3:21' },
+    { name: 'Magenta', length: '2:15' }
+  ]
+};
 
-  config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
+angular.module('BlocJams', ['ui.router'])
+
+  .config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
 
     $stateProvider.state('landing', {
@@ -8,11 +24,18 @@ angular.module('BlocJams', ['ui.router']).
       controller: 'Landing.controller',
       templateUrl: '/templates/landing.html'
     });
-  }]).
 
-  controller('Landing.controller', ['$scope', function($scope) {
+    $stateProvider.state('collection', {
+      url: '/collection',
+      controller: 'Collection.controller',
+      templateUrl: '/templates/collection.html'
+    });
+  }])
+
+  .controller('Landing.controller', ['$scope', function($scope) {
     $scope.title = 'Bloc Jams';
     $scope.subText = 'Turn the music up!';
+    $scope.bodyClass = 'landing';
 
     $scope.subTextClicked = function() {
       $scope.subText += '!';
@@ -37,5 +60,14 @@ angular.module('BlocJams', ['ui.router']).
     function shuffle(o){ //v1.0
       for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
       return o;
-    };
+    }
+  }])
+
+  .controller('Collection.controller', ['$scope', function($scope) {
+    $scope.albums = [];
+    $scope.bodyClass = 'collection'
+
+    for (var i = 0; i < 33; i++) {
+      $scope.albums.push(angular.copy(albumPicasso));
+    }
   }]);
