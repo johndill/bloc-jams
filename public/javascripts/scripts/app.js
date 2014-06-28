@@ -221,4 +221,45 @@ angular.module('BlocJams', ['ui.router'])
         });
       }
     };
+  })
+
+  .directive('clickMe', function() {
+    return {
+      link: function(scope, element, attributes) {
+        $(element).click(function() {
+          alert('Move along...nothing to see here...');
+        });
+      }
+    };
+  })
+
+  .directive('countHoverTime', function() {
+    var hoverTime = 0;
+    var timer
+    var timerActive = false;
+
+    var trackTime = function() {
+      hoverTime++;
+      timer = setTimeout(function(){ trackTime(); }, 1000);
+    };
+
+    var onHover = function() {
+      if (!timerActive) {
+        timerActive = true;
+        trackTime();
+      }
+    };
+
+    var offHover = function() {
+      console.log('You hovered for ' + hoverTime + ' second(s).');
+      clearTimeout(timer);
+      timerActive = false;
+      hoverTime = 0;
+    };
+
+    return {
+      link: function(scope, element, attributes) {
+        $(element).hover(onHover, offHover);
+      }
+    }
   });
