@@ -1,4 +1,4 @@
-<div class='slider'>
-  <div class='fill'></div>
-  <div class='thumb'></div>
+<div class='slider' data-ng-click='onClickSlider($event)'>
+  <div class='fill' data-ng-style='fillStyle()'></div>
+  <div class='thumb' data-ng-style='thumbStyle()' data-ng-mousedown='trackThumb()'></div>
 </div>
