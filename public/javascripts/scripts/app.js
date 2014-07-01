@@ -118,9 +118,15 @@ angular.module('BlocJams', ['ui.router'])
 
   .controller('PlayerBar.controller', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
     $scope.songPlayer = SongPlayer;
+
+    SongPlayer.onTimeUpdate(function(event, time) {
+      $scope.$apply(function() {
+        $scope.playTime = time;
+      });
+    });
   }])
 
-  .service('SongPlayer', function() {
+  .service('SongPlayer', ['$rootScope', function($rootScope) {
     var currentSoundFile = null;
 
     var trackIndex = function(album, song) {
@@ -165,9 +171,12 @@ angular.module('BlocJams', ['ui.router'])
 
       seek: function(time) {
         if(currentSoundFile) {
-          console.log('seeking to ' + time + ' seconds');
           currentSoundFile.setTime(time);
         }
+      },
+
+      onTimeUpdate: function(callback) {
+        return $rootScope.$on('sound:timeupdate', callback);
       },
 
       setSong: function(album, song) {
@@ -183,10 +192,14 @@ angular.module('BlocJams', ['ui.router'])
           preload: true
         });
 
+        currentSoundFile.bind('timeupdate', function(e) {
+          $rootScope.$broadcast('sound:timeupdate', this.getTime());
+        });
+
         this.play();
       }
     };
-  })
+  }])
 
   .directive('slider', ['$document', function($document) {
     var calculateSliderPercentFromMouseEvent = function($slider, event) {
@@ -277,4 +290,25 @@ angular.module('BlocJams', ['ui.router'])
         };
       }
     };
-  }]);
+  }])
+
+  .filter('timecode', function() {
+    return function(seconds) {
+      var ret;
+      seconds = Number.parseFloat(seconds);
+      
+      if (Number.isNaN(seconds)) {
+        ret = '-:--';
+      }
+      else {
+        var wholeSeconds = Math.floor(seconds);
+        var minutes = Math.floor(wholeSeconds / 60);
+        var remainingSeconds = wholeSeconds % 60;
+        var divider = (remainingSeconds < 10) ? ':0' : ':';
+
+        ret = minutes + divider + remainingSeconds;
+      }
+
+      return ret;
+    }
+  });
